@@ -1,4 +1,13 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Projeto.NET.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ProjetoNETContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("ProjetoNETContext"), builder =>
+    builder.MigrationsAssembly("Projeto.NET")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
